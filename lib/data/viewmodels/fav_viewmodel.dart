@@ -1,29 +1,26 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flickr_app/data/models/photo_model.dart';
-import 'package:flickr_app/utils/constants.dart';
-import 'package:flickr_app/utils/url.dart';
 import 'package:flutter/material.dart';
 import 'package:jbaza/jbaza.dart';
 import 'package:oauth1/oauth1.dart';
 
-class PhotosViewModel extends BaseViewModel {
-  PhotosViewModel(this._client, BuildContext context) : super(context: context);
+import '../../utils/constants.dart';
+import '../../utils/url.dart';
+import '../models/photo_model.dart';
+
+class FavViewModel extends BaseViewModel {
+  FavViewModel(this._client, BuildContext context) : super(context: context);
   final Client _client;
   Set<PhotoModel> listPhotos = {};
-  bool isSearchView = false;
   int totalPages = 1;
   int currentPage = 0;
 
-  Future getPhotos(String tag,
-      {String? search, int? page, bool isClear = false}) async {
+  Future getPhotos(String tag, {int? page, bool isClear = false}) async {
     setBusy(true, tag: tag);
     try {
-      var response = await _client.get(Url.getUrl(
-          search != null ? 'flickr.photos.search' : 'flickr.photos.getRecent',
-          query:
-              '&per_page=15&page=${page ?? 1}${search != null ? '&text=$search' : ''}'));
+      var response = await _client.get(Url.getUrl('flickr.favorites.getList',
+          query: '&per_page=15&page=${page ?? 1}'));
       var data = jsonDecode(response.body);
       if (response.statusCode == 200) {
         totalPages = data['photos']['pages'];
@@ -51,16 +48,17 @@ class PhotosViewModel extends BaseViewModel {
     }
   }
 
-  Future setFavorite(String id) async {
+  Future removeFavorite(String id) async {
     setBusy(true, tag: id);
     try {
       var response = await _client
-          .post(Url.getUrl('flickr.favorites.add', query: '&photo_id=$id'));
+          .post(Url.getUrl('flickr.favorites.remove', query: '&photo_id=$id'));
       var data = jsonDecode(response.body);
       if (response.statusCode == 200) {
         for (var e in listPhotos) {
           if (e.id == id) {
-            e.isFav = true;
+            listPhotos.remove(e);
+            break;
           }
         }
         setSuccess(tag: id);
@@ -80,10 +78,5 @@ class PhotosViewModel extends BaseViewModel {
       setError(model, tag: id);
       shwoInfo(model.message);
     }
-  }
-
-  setSearchView(bool value) {
-    isSearchView = value;
-    notifyListeners();
   }
 }

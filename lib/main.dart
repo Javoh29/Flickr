@@ -20,8 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flickr app',
       theme: ThemeData(
-        primaryColor: primaryColor,
-      ),
+          primaryColor: primaryColor, scaffoldBackgroundColor: scaffoldColor),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Routes.generateRoute,
     );

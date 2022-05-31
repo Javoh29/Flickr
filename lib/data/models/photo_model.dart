@@ -9,6 +9,7 @@ class PhotoModel {
   int? isfriend;
   int? isfamily;
   String? dateFaved;
+  bool isFav = false;
 
   PhotoModel({
     this.id,
@@ -74,4 +75,6 @@ class PhotoModel {
       dateFaved: dateFaved ?? this.dateFaved,
     );
   }
+
+  String get imgPath => '$server/${id}_$secret';
 }
