@@ -2,6 +2,7 @@ import 'package:flickr_app/ui/pages/favorites_page.dart';
 import 'package:flickr_app/ui/pages/photos_page.dart';
 import 'package:flickr_app/ui/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../utils/constants.dart';
 
@@ -16,7 +17,7 @@ class _MainPageState extends State<MainPage> {
   final PageStorageBucket _bucket = PageStorageBucket();
   int currentTab = 0;
 
-  final List<Widget> pages = const <Widget>[
+  final List<Widget> pages = <Widget>[
     PhotosPage(),
     FavoritesPage(),
     ProfilePage()
@@ -24,6 +25,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: primaryColor,
+        statusBarIconBrightness: Brightness.dark));
     return Scaffold(
         body: PageStorage(
           bucket: _bucket,

@@ -1,13 +1,24 @@
+import 'package:flickr_app/data/viewmodels/local_viewmodel.dart';
+import 'package:flickr_app/data/viewmodels/photos_viewmodel.dart';
 import 'package:flickr_app/ui/widgets/item_photo.dart';
+import 'package:flickr_app/utils/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:jbaza/jbaza.dart';
 
 import '../../utils/constants.dart';
 
-class PhotosPage extends StatelessWidget {
-  const PhotosPage({Key? key}) : super(key: key);
+class PhotosPage extends ViewModelBuilderWidget<PhotosViewModel> {
+  PhotosPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  void onViewModelReady(PhotosViewModel viewModel) {
+    // TODO: implement onViewModelReady
+    super.onViewModelReady(viewModel);
+  }
+
+  @override
+  Widget builder(
+      BuildContext context, PhotosViewModel viewModel, Widget? child) {
     return ListView(
       children: [
         AppBar(
@@ -25,5 +36,10 @@ class PhotosPage extends StatelessWidget {
         ItemPhoto(),
       ],
     );
+  }
+
+  @override
+  PhotosViewModel viewModelBuilder(BuildContext context) {
+    return PhotosViewModel(locator<LocalViewModel>().client!);
   }
 }
