@@ -1,8 +1,13 @@
 import 'package:flickr_app/ui/pages/main_page.dart';
+import 'package:flickr_app/utils/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:jbaza/jbaza.dart';
 
 void main() {
-  runApp(const MyApp());
+  setupConfigs(() async {
+    setupLocator();
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {

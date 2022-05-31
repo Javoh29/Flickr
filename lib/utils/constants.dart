@@ -15,7 +15,7 @@ const String errInet = 'Пожалуйста, проверьте подключ�
 const String tokenBox = 'token_box';
 const String tokenBoxKey = 'token_box_key';
 
-
+const String apiKey = '390f3e4774cf2e23311ddcc7ac9bc6f2';
 const String consumerKey = 'fdf89c8699c01cfd7a4516cc56e11a60';
 const String consumerSecret = '8928b7b8aeac0a9d';
 const String oauthSignatureMethod = 'HMAC-SHA1';
