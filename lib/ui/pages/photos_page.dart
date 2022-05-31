@@ -12,8 +12,8 @@ class PhotosPage extends ViewModelBuilderWidget<PhotosViewModel> {
 
   @override
   void onViewModelReady(PhotosViewModel viewModel) {
-    // TODO: implement onViewModelReady
     super.onViewModelReady(viewModel);
+    viewModel.getPhotos();
   }
 
   @override
@@ -30,16 +30,13 @@ class PhotosPage extends ViewModelBuilderWidget<PhotosViewModel> {
           ),
           centerTitle: true,
         ),
-        ItemPhoto(),
-        ItemPhoto(),
-        ItemPhoto(),
-        ItemPhoto(),
+        ...viewModel.listPhotos.map(((e) => ItemPhoto())).toList()
       ],
     );
   }
 
   @override
   PhotosViewModel viewModelBuilder(BuildContext context) {
-    return PhotosViewModel(locator<LocalViewModel>().client!);
+    return PhotosViewModel(locator<LocalViewModel>().client!, context);
   }
 }
