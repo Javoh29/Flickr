@@ -34,20 +34,18 @@ class PhotosViewModel extends BaseViewModel {
         }
         setSuccess(tag: tag);
       } else {
-        var model = VMException(data['message'] ?? 'Unknown error',
-            callFuncName: 'getPhotos', line: '1', response: response);
-        setError(model, tag: tag);
-        shwoInfo(model.message);
+        setError(
+            VMException(data['message'] ?? 'Unknown error',
+                callFuncName: 'getPhotos', line: '1', response: response),
+            tag: tag,
+            isShowInfo: true);
       }
     } on SocketException {
-      var model = VMException(errInet, callFuncName: 'getPhotos', line: '2');
-      setError(model, tag: tag);
-      shwoInfo(model.message);
+      setError(VMException(errInet, callFuncName: 'getPhotos', line: '2'),
+          tag: tag, isShowInfo: true);
     } catch (e) {
-      var model =
-          VMException(e.toString(), callFuncName: 'getPhotos', line: '3');
-      setError(model, tag: tag);
-      shwoInfo(model.message);
+      setError(VMException(e.toString(), callFuncName: 'getPhotos', line: '3'),
+          tag: tag, isShowInfo: true);
     }
   }
 
@@ -65,20 +63,20 @@ class PhotosViewModel extends BaseViewModel {
         }
         setSuccess(tag: id);
       } else {
-        var model = VMException(data['message'] ?? 'Unknown error',
-            callFuncName: 'setFavorite', line: '1', response: response);
-        setError(model, tag: id);
-        shwoInfo(model.message);
+        setError(
+            VMException(data['message'] ?? 'Unknown error',
+                callFuncName: 'setFavorite', line: '1', response: response),
+            tag: id,
+            isShowInfo: true);
       }
     } on SocketException {
-      var model = VMException(errInet, callFuncName: 'setFavorite', line: '2');
-      setError(model, tag: id);
-      shwoInfo(model.message);
+      setError(VMException(errInet, callFuncName: 'setFavorite', line: '2'),
+          tag: id, isShowInfo: true);
     } catch (e) {
-      var model =
-          VMException(e.toString(), callFuncName: 'setFavorite', line: '3');
-      setError(model, tag: id);
-      shwoInfo(model.message);
+      setError(
+          VMException(e.toString(), callFuncName: 'setFavorite', line: '3'),
+          tag: id,
+          isShowInfo: true);
     }
   }
 

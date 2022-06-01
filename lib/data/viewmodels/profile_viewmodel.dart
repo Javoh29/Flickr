@@ -29,20 +29,20 @@ class ProfileViewModel extends BaseViewModel {
         userModel = UserModel.fromJson(data['profile']);
         await getPhotos(tag);
       } else {
-        var model = VMException(data['message'] ?? 'Unknown error',
-            callFuncName: 'getUserData', line: '1', response: response);
-        setError(model, tag: tag);
-        shwoInfo(model.message);
+        setError(
+            VMException(data['message'] ?? 'Unknown error',
+                callFuncName: 'getUserData', line: '1', response: response),
+            tag: tag,
+            isShowInfo: true);
       }
     } on SocketException {
-      var model = VMException(errInet, callFuncName: 'getUserData', line: '2');
-      setError(model, tag: tag);
-      shwoInfo(model.message);
+      setError(VMException(errInet, callFuncName: 'getUserData', line: '2'),
+          tag: tag, isShowInfo: true);
     } catch (e) {
-      var model =
-          VMException(e.toString(), callFuncName: 'getUserData', line: '3');
-      setError(model, tag: tag);
-      shwoInfo(model.message);
+      setError(
+          VMException(e.toString(), callFuncName: 'getUserData', line: '3'),
+          tag: tag,
+          isShowInfo: true);
     }
   }
 
@@ -61,20 +61,18 @@ class ProfileViewModel extends BaseViewModel {
         }
         setSuccess(tag: tag);
       } else {
-        var model = VMException(data['message'] ?? 'Unknown error',
-            callFuncName: 'getPhotos', line: '1', response: response);
-        setError(model, tag: tag);
-        shwoInfo(model.message);
+        setError(
+            VMException(data['message'] ?? 'Unknown error',
+                callFuncName: 'getPhotos', line: '1', response: response),
+            tag: tag,
+            isShowInfo: true);
       }
     } on SocketException {
-      var model = VMException(errInet, callFuncName: 'getPhotos', line: '2');
-      setError(model, tag: tag);
-      shwoInfo(model.message);
+      setError(VMException(errInet, callFuncName: 'getPhotos', line: '2'),
+          tag: tag, isShowInfo: true);
     } catch (e) {
-      var model =
-          VMException(e.toString(), callFuncName: 'getPhotos', line: '3');
-      setError(model, tag: tag);
-      shwoInfo(model.message);
+      setError(VMException(e.toString(), callFuncName: 'getPhotos', line: '3'),
+          tag: tag, isShowInfo: true);
     }
   }
 }

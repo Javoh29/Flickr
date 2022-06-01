@@ -231,7 +231,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: bfd6a54ede666bb74526fcaec223ef8e73e7bb3c
+      resolved-ref: "0d302989f68fc52896915724a977d101ee451fa1"
       url: "https://github.com/Javoh29/Jbaza"
     source: git
     version: "0.1.5"
